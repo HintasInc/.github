@@ -6,6 +6,7 @@
   "prHourlyLimit": 0,
   "prConcurrentLimit": 10,
   "rangeStrategy": "bump",
+  "rebaseWhen": "conflicted",
   "vulnerabilityAlerts": {
     "enabled": true,
     "schedule": [],
@@ -20,12 +21,8 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "non-major dependencies"
-    },
-    {
-      "matchDepTypes": ["devDependencies"],
-      "matchUpdateTypes": ["patch", "minor"],
-      "groupName": "devDependencies (non-major)"
+      "groupName": "non-major dependencies",
+      "automerge": true
     },
     {
       "matchUpdateTypes": ["major"],
@@ -35,6 +32,11 @@
     {
       "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions"
+    },
+    {
+      "matchDepNames": ["node"],
+      "groupName": "non-major dependencies",
+      "matchUpdateTypes": ["minor", "patch"]
     }
   ]
 }
